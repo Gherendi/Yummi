@@ -46,12 +46,14 @@ struct ContentView: View {
                 DatePicker("Expiry date:", selection: $newExpiryDate, displayedComponents: .date)            }
             Section {
                 Button("Submit") {
-                    
+                    print("name: \(newname), Quantity: \(newQuantity), Category: \(newcategory), Unit: \(newUnit), Expiry Date: \(newExpiryDate) ")
+                    let newingredient = Ingredient(name: newname, category: newcategory, Quantity: newQuantity, Unit: (newUnit), ExpiryDate: newExpiryDate)
                 }
             }
         }
         VStack {
             Text(ingredient.Display())
+            
         }
         .padding()
     }
