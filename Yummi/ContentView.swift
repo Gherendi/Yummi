@@ -29,9 +29,9 @@ struct ContentView: View {
     @State private var newUnit = 0
     @State private var newExpiryDate = Date()
     
-
+    @State private var Ingredients:  [Ingredient] = [Ingredient(name: "Carrot", category: "Vegetable", Quantity: 10, Unit: 2, ExpiryDate: Date())]
     
-    let ingredient = Ingredient(name: "Carrot", category: "Vegetable", Quantity: 10, Unit: 2, ExpiryDate: Date())
+    
     var body: some View {
         Form{
             Section(header: Text("New Ingredient")) {
@@ -46,13 +46,15 @@ struct ContentView: View {
                 DatePicker("Expiry date:", selection: $newExpiryDate, displayedComponents: .date)            }
             Section {
                 Button("Submit") {
-                    print("name: \(newname), Quantity: \(newQuantity), Category: \(newcategory), Unit: \(newUnit), Expiry Date: \(newExpiryDate) ")
                     let newingredient = Ingredient(name: newname, category: newcategory, Quantity: newQuantity, Unit: (newUnit), ExpiryDate: newExpiryDate)
+                    Ingredients.append(newingredient)
                 }
             }
         }
         VStack {
-            Text(ingredient.Display())
+            ForEach(Ingredients, id: \.name) {
+                Ingredient in Text(Ingredient.Display())
+            }
             
         }
         .padding()
