@@ -36,6 +36,7 @@ final class YummiUITests: XCTestCase {
         
         app.textFields["Name:"].typeText("NewIngredientName")
         app.textFields["category:"].typeText("")
+        
     }
 
     func testLaunchPerformance() throws {

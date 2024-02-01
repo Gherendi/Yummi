@@ -13,13 +13,30 @@ struct Ingredient {
     let Quantity: Int
     let Unit : Int
     let ExpiryDate: Date
-    
+
     
     func Display() -> String {
         return ("Name: \(name) , Quantity: \(Quantity) , Category: \(category) , Unit: \(Unit) , ExpiryDate: \(ExpiryDate)")
     }
     
 }
+
+
+struct Recipe {
+    let recipeName: String
+    let recipeIngredients: String
+    let recipeIsFavourite: Bool
+    let recipeRating: Int
+    
+    static func exampleRecipes() -> [Recipe] {
+        [Recipe(recipeName: "Toad in the hole", recipeIngredients: "Egg, flour, milk, sausage", recipeIsFavourite: false, recipeRating: 75), Recipe(recipeName: "Mac and Cheese", recipeIngredients: "cheese, flour, milk, pasta", recipeIsFavourite: true, recipeRating: 95), Recipe(recipeName: "Sushi", recipeIngredients: "Fish, rice", recipeIsFavourite: false, recipeRating: 85)]
+    }
+    
+
+}
+
+
+
 
 
 struct ContentView: View {
@@ -30,6 +47,9 @@ struct ContentView: View {
     @State private var newExpiryDate = Date()
     
     @State private var Ingredients:  [Ingredient] = [Ingredient(name: "Carrot", category: "Vegetable", Quantity: 10, Unit: 2, ExpiryDate: Date())]
+    
+
+    
     
     
     var body: some View {
