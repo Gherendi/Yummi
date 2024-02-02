@@ -34,9 +34,15 @@ final class YummiUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
         
-        app.textFields["Name:"].typeText("NewIngredientName")
-        app.textFields["category:"].typeText("")
+        app.textFields["Name:"].typeText("newname")
+        app.textFields["category:"].typeText("newcateogry")
         
+        app.steppers["Quantity: 0"].tap()
+        app.steppers["Unit: 1"].tap()
+        
+        app.buttons["Submit"].tap()
+        
+        XCTAssertTrue(app.staticTexts["Name: newname"].exists)
     }
 
     func testLaunchPerformance() throws {

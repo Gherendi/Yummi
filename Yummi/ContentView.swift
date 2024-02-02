@@ -28,11 +28,13 @@ struct Recipe {
     let recipeIsFavourite: Bool
     let recipeRating: Int
     
+    
+    #if DEBUG
     static func exampleRecipes() -> [Recipe] {
         [Recipe(recipeName: "Toad in the hole", recipeIngredients: "Egg, flour, milk, sausage", recipeIsFavourite: false, recipeRating: 75), Recipe(recipeName: "Mac and Cheese", recipeIngredients: "cheese, flour, milk, pasta", recipeIsFavourite: true, recipeRating: 95), Recipe(recipeName: "Sushi", recipeIngredients: "Fish, rice", recipeIsFavourite: false, recipeRating: 85)]
     }
     
-
+    #endif
 }
 
 
@@ -81,8 +83,37 @@ struct ContentView: View {
     }
 }
 
+
+
+struct RecipesView: View {
+    
+    @State private var Recipes: [Recipe] = Recipe.exampleRecipes()
+    
+    var body: some View {
+        List {
+            ForEach(Recipes, id:\.recipeName) { recipe in 
+                Text(recipe.recipeName)
+            }
+        }
+    }
+   
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 #Preview {
     ContentView() 
+//    RecipesView()
 }
 
 
