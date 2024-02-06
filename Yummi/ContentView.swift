@@ -27,6 +27,7 @@ struct Recipe {
     let recipeIngredients: String
     let recipeIsFavourite: Bool
     let recipeRating: Int
+
     
     
     #if DEBUG
@@ -91,8 +92,27 @@ struct RecipesView: View {
     
     var body: some View {
         List {
-            ForEach(Recipes, id:\.recipeName) { recipe in 
-                Text(recipe.recipeName)
+            ForEach(Recipes, id:\.recipeName) { recipe in
+                HStack {
+                    VStack(alignment: .leading) {
+                        Image(recipe.recipeName)
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                        Text(recipe.recipeName)
+                            .font(.headline)
+                        Text("Ingredients: \(recipe.recipeIngredients)")
+                            .font(.subheadline)
+                        Text("Rating: \(recipe.recipeRating)")
+                            .font(.subheadline)
+                    }
+                    
+                    Spacer()
+                    if recipe.recipeIsFavourite{
+                        Text("✅")
+                    } else {
+                        Text("❌")
+                    }
+                }
             }
         }
     }
@@ -112,8 +132,8 @@ struct RecipesView: View {
 
 
 #Preview {
-    ContentView() 
-//    RecipesView()
+   // ContentView()
+    RecipesView()
 }
 
 
