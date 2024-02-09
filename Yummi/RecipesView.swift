@@ -12,12 +12,13 @@ struct Recipe {
     let recipeIngredients: String
     let recipeIsFavourite: Bool
     let recipeRating: Int
+    let recipeServings: Int
 
     
     
     #if DEBUG
     static func exampleRecipes() -> [Recipe] {
-        [Recipe(recipeName: "Toad in the hole", recipeIngredients: "Egg, flour, milk, sausage", recipeIsFavourite: false, recipeRating: 75), Recipe(recipeName: "Mac and Cheese", recipeIngredients: "cheese, flour, milk, pasta", recipeIsFavourite: true, recipeRating: 95), Recipe(recipeName: "Sushi", recipeIngredients: "Fish, rice", recipeIsFavourite: false, recipeRating: 85)]
+        [Recipe(recipeName: "Toad in the hole", recipeIngredients: "Egg, flour, milk, sausage", recipeIsFavourite: false, recipeRating: 75, recipeServings: 4), Recipe(recipeName: "Mac and Cheese", recipeIngredients: "cheese, flour, milk, pasta", recipeIsFavourite: true, recipeRating: 95, recipeServings: 6), Recipe(recipeName: "Sushi", recipeIngredients: "Fish, rice", recipeIsFavourite: false, recipeRating: 85, recipeServings: 2)]
     }
     
     #endif
@@ -42,6 +43,7 @@ struct RecipesView: View {
                             .font(.subheadline)
                         Text("Rating: \(recipe.recipeRating)")
                             .font(.subheadline)
+                        Text("Servings: \(recipe.recipeServings)")
                     }
                     
                     Spacer()

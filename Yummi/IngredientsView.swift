@@ -29,38 +29,53 @@ struct IngredientView: View {
     @State private var newUnit = 0
     @State private var newExpiryDate = Date()
     
-    @State private var Ingredients:  [Ingredient] = [Ingredient(name: "Carrot", category: "Vegetable", Quantity: 10, Unit: 2, ExpiryDate: Date())]
+    @State private var ingredients:  [Ingredient] = [Ingredient(name: "Carrot", category: "Vegetable", Quantity: 10, Unit: 2, ExpiryDate: Date())]
     
-
     
+    private func clearIngredient(){
+        newname = ""
+        newcategory = ""
+        newQuantity = 0
+        newUnit = 0
+        newExpiryDate = Date()
+    }
+    
+    private func delete(at offsets: IndexSet){
+        ingredients.remove(atOffsets: offsets)
+    }
     
     
     var body: some View {
-        Form{
-            Section(header: Text("New Ingredient")) {
-                TextField("name:", text: $newname)
-                TextField("category:", text: $newcategory)
-                Stepper(value: $newQuantity, in: 0...1000, label: {
-                    Text("Quantity: \(newQuantity)")
-                })
-                Stepper(value: $newUnit, in: 1...1000, label: {
-                    Text("Unit: \(newUnit)")
-                })
-                DatePicker("Expiry date:", selection: $newExpiryDate, displayedComponents: .date)            }
-            Section {
-                Button("Submit") {
-                    let newingredient = Ingredient(name: newname, category: newcategory, Quantity: newQuantity, Unit: (newUnit), ExpiryDate: newExpiryDate)
-                    Ingredients.append(newingredient)
+        NavigationView {
+            VStack {
+                Form{
+                    Section(header: Text("New Ingredient")) {
+                        TextField("name:", text: $newname)
+                        TextField("category:", text: $newcategory)
+                        Stepper(value: $newQuantity, in: 0...1000, label: {
+                            Text("Quantity: \(newQuantity)")
+                        })
+                        Stepper(value: $newUnit, in: 1...1000, label: {
+                            Text("Unit: \(newUnit)")
+                        })
+                        DatePicker("Expiry date:", selection: $newExpiryDate, displayedComponents: .date)            }
+                    Section {
+                        Button("Submit") {
+                            let newingredient = Ingredient(name: newname, category: newcategory, Quantity: newQuantity, Unit: (newUnit), ExpiryDate: newExpiryDate)
+                            ingredients.append(newingredient)
+                            clearIngredient()
+                        }
+                    }
                 }
+                List{
+                    ForEach(ingredients, id: \.name) {
+                        Ingredient in Text(Ingredient.Display())
+                    }
+                    .onDelete(perform: delete)
+                }
+                .navigationTitle("Ingredients")
             }
+            .padding()
         }
-        VStack {
-            ForEach(Ingredients, id: \.name) {
-                Ingredient in Text(Ingredient.Display())
-            }
-            
-        }
-        .padding()
     }
 }
-
